@@ -9,7 +9,7 @@ import tech.esel.usecases.consultar_imposto.ConsultarImpostoBcbResponseModel;
 import java.time.LocalDate;
 
 @RestController
-@RequestMapping("/api/v1/bcb/impostos")
+@RequestMapping("/api/bcb/impostos")
 public class ConsultarImpostoBcbController {
 
     private final ConsultarImpostoBcbInputBoundary inputBoundary;

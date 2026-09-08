@@ -17,11 +17,8 @@ public class BcbImpostoGatewayImpl implements BcbImpostoGateway {
 
     @Override
     public Imposto consultarImposto(String sigla, LocalDate data) {
-        // 1. Monta a URL da API do Banco Central (Exemplo fictício)
         String url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs." + sigla + "/dados/ultimos/1?formato=json";
 
-        // 2. Faz a chamada HTTP real
-        // Supondo que você criou um DTO interno apenas para ler o JSON do BCB
         BcbDataResponseDTO[] bcbResponseArray = restTemplate.getForObject(url, BcbDataResponseDTO[].class);
 
         if (bcbResponseArray == null || bcbResponseArray.length == 0) {
@@ -33,7 +30,6 @@ public class BcbImpostoGatewayImpl implements BcbImpostoGateway {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataFormatada = LocalDate.parse(bcbDataResponseDTO.dataCotacao(), formatter);
 
-        // 3. Traduz o DTO da web para a ENTIDADE PURA do seu domínio
         return new Imposto(sigla, bcbDataResponseDTO.valor(), dataFormatada);
     }
 }
